@@ -1,7 +1,7 @@
 require 'sequel'
-require 'win32/sound'
+# require 'win32/sound'
 require 'serialport'
-include Win32
+#include Win32
 
 db = Sequel.sqlite('database.db')
 begin
@@ -53,6 +53,6 @@ loop do
     points = "#{row[:point]} poäng. Har totalt #{row[:total]}"
     puts "#{agent} flyttar från #{movement} och får #{points}."
     port.write turn
-    Sound.play(sound)
+   # Sound.play(sound)
   end
 end
