@@ -21,7 +21,6 @@ puts "######################################"
 puts "          NSAgents-backend"
 puts "   Made by Anton, CW, Eva and Isak"
 puts "######################################"
-puts " "
 
 counter = 0
 
