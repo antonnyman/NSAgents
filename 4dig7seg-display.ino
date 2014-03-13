@@ -6,21 +6,43 @@
 |   |    e   c
 |___|o     d    p
 
+
+
+~ CONNECTION DIAGRAM ~
+Arduino pin left, segment middle, display pin right
+
+0 - a - 14
+1 - b - 16
+2 - c - 13
+3 - d - 3
+4 - e - 5
+5 - f - 11
+6 - g - 15
+7 - f - 7
+8 - d1 - 6
+9 - d2 - 8
+10 -
+11 -
+12 -
+A0 - plus button
+A2 - minus button
+
+
 */
-int a = 1;
-int b = 2;
-int c = 3;
-int d = 4;
-int e = 5;
-int f = 6;
-int g = 7;
-int p = 8;
+int a = 0;
+int b = 1;
+int c = 2;
+int d = 3;
+int e = 4;
+int f = 5;
+int g = 6;
+int p = 7;
 
 // digits
-int d1 = 12;
-int d2 = 11;
-int d3 = 10;
-int d4 = 9;
+int d1 = 11;
+int d2 = 10;
+int d3 = 9;
+int d4 = 8;
 
 // counters, resets et. al.
 int counter1 = 0;
@@ -41,27 +63,37 @@ void setup() {
   pinMode(f, OUTPUT);
   pinMode(g, OUTPUT);
   pinMode(p, OUTPUT);
-  pinMode(14, OUTPUT);
-
+  
+  pinMode(A0, INPUT);
+  pinMode(A1, INPUT);
 }
 
 void loop() {
-  if(digitalRead(14) == LOW) {
+  if(digitalRead(A0) == HIGH) {
     counter1++;
     delay(300);
   }
   if(counter1 > 9) {
-    counter1 = 0;
     counter2++;
+    counter1 = 0;
   }
+ 
+ if(digitalRead(A1) == HIGH) {
+   if(counter1 == 0) {
+     counter2--;
+     counter1 = 9;
+   } else
+   counter1--;
+   delay(300); 
+ }
+
   clearLEDs();
   pickDigit(1);
   displayNumber(counter1);
-
-  if(counter2) {
-    pickDigit(2);
-    displayNumber(counter2);
-  }
+  
+  clearLEDs();
+  pickDigit(2);
+  displayNumber(counter2);
 }
 
 void pickDigit(int x)
@@ -207,6 +239,7 @@ void eight()
   digitalWrite(e, LOW);
   digitalWrite(f, LOW);
   digitalWrite(g, LOW);
+  digitalWrite(p, LOW);
 }
 
 void nine()

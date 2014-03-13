@@ -5,7 +5,7 @@ require 'serialport'
 
 db = Sequel.sqlite('database.db')
 begin
-  port_file = 'COM3'
+  port_file = '/dev/tty.usbmodem1421'
 rescue Exception => e
 
 end
