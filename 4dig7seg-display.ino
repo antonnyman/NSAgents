@@ -29,6 +29,7 @@ A2 - minus button
 
 
 */
+
 int a = 0;
 int b = 1;
 int c = 2;
@@ -39,15 +40,21 @@ int g = 6;
 int p = 7;
 
 // digits
-int d1 = 11;
-int d2 = 10;
+int d1 = 9;
+int d2 = 8;
 int d3 = 9;
 int d4 = 8;
+int led1 = 13;
+int led2 = 12;
 
 // counters, resets et. al.
 int counter1 = 0;
 int counter2 = 0;
-boolean once;
+boolean once1 = false;
+boolean once2 = false;
+
+int firstSerialNumber;
+int secondSerialNumber;
 
 
 void setup() {
@@ -64,36 +71,101 @@ void setup() {
   pinMode(g, OUTPUT);
   pinMode(p, OUTPUT);
   
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  
   pinMode(A0, INPUT);
   pinMode(A1, INPUT);
+//  pinMode(A2, INPUT);
+//  pinMode(A3, INPUT);
+  
+  // Serial.begin(9600);
 }
 
 void loop() {
-  if(digitalRead(A0) == HIGH) {
-    counter1++;
-    delay(300);
-  }
-  if(counter1 > 9) {
-    counter2++;
-    counter1 = 0;
-  }
- 
- if(digitalRead(A1) == HIGH) {
-   if(counter1 == 0) {
-     counter2--;
-     counter1 = 9;
-   } else
-   counter1--;
-   delay(300); 
- }
-
-  clearLEDs();
-  pickDigit(1);
-  displayNumber(counter1);
+//  firstSerialNumber = 0;
+//  secondSerialNumber = Serial.read();
   
-  clearLEDs();
-  pickDigit(2);
-  displayNumber(counter2);
+//  if(digitalRead(A0) == HIGH) {
+//    counter1++;
+//    delay(300);
+//  }
+//  if(counter1 > 9) {
+//    counter2++;
+//    counter1 = 0;
+//  }
+//
+//digitalWrite(led, HIGH);
+
+ if(digitalRead(A1) == HIGH) {
+   if(!once1) {
+     delay(500);
+     digitalWrite(led1, HIGH);
+     once1 = true;
+   }
+ }
+  if(digitalRead(A1) == HIGH) {
+    if(once1) {
+      delay(500);
+   digitalWrite(led1, LOW);
+   once1 = false;
+    }
+ }
+// 
+//  if(digitalRead(A1) == HIGH) {
+//   if(!once2) {
+//     delay(500);
+//     digitalWrite(led2, HIGH);
+//     once2 = true;
+////   if(counter1 == 0) {
+////     counter2--;
+////     counter1 = 9;
+////   } else
+////   counter1--;
+////   delay(300); 
+//   }
+// }
+//  if(digitalRead(A1) == HIGH) {
+//    if(once2) {
+//      delay(500);
+//   digitalWrite(led2, LOW);
+//   once2 = false;
+   
+//   if(counter1 == 0) {
+//     counter2--;
+//     counter1 = 9;
+//   } else
+//   counter1--;
+//   delay(300);
+//    }
+// }
+
+//if(digitalRead(A2) == HIGH) {
+//    counter1++;
+//    delay(300);
+//  }
+//if(counter1 > 9) {
+//    counter2++;
+//    counter1 = 0;
+//}
+//
+//if(digitalRead(A3) == HIGH) {
+//   if(counter1 == 0) {
+//     counter2--;
+//     counter1 = 9;
+//   } else
+//   counter1--;
+//   delay(300);
+//}
+
+
+pickDigit(1);
+displayNumber(counter1);
+clearLEDs();
+
+pickDigit(2);
+displayNumber(counter2);
+clearLEDs();
 }
 
 void pickDigit(int x)
@@ -155,8 +227,8 @@ void zero()
 
 void one()
 {
-  digitalWrite(a, HIGH);
-  digitalWrite(b, LOW);
+  digitalWrite(a, LOW);
+  digitalWrite(b, HIGH);
   digitalWrite(c, LOW);
   digitalWrite(d, HIGH);
   digitalWrite(e, HIGH);
@@ -188,8 +260,8 @@ void three()
 
 void four()
 {
-  digitalWrite(a, HIGH);
-  digitalWrite(b, LOW);
+  digitalWrite(a, LOW);
+  digitalWrite(b, HIGH);
   digitalWrite(c, LOW);
   digitalWrite(d, HIGH);
   digitalWrite(e, HIGH);
@@ -199,8 +271,8 @@ void four()
 
 void five()
 {
-  digitalWrite(a, LOW);
-  digitalWrite(b, HIGH);
+  digitalWrite(a, HIGH);
+  digitalWrite(b, LOW);
   digitalWrite(c, LOW);
   digitalWrite(d, LOW);
   digitalWrite(e, HIGH);

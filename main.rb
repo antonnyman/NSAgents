@@ -1,21 +1,21 @@
 require 'sequel'
 # require 'win32/sound'
-require 'serialport'
-#include Win32
+# require 'serialport'
+# include Win32
 
 db = Sequel.sqlite('database.db')
-begin
-  port_file = '/dev/tty.usbmodem1421'
-rescue Exception => e
+#begin
+#  port_file = '/dev/tty.usbmodem1421'
+#rescue Exception => e
 
-end
+#end
 
-baud_rate = 9600
-data_bits = 8
-stop_bits = 1
-parity = SerialPort::NONE
+#baud_rate = 9600
+#data_bits = 8
+#stop_bits = 1
+#parity = SerialPort::NONE
 
-port = SerialPort.new(port_file, baud_rate, data_bits, stop_bits, parity)
+#port = SerialPort.new(port_file, baud_rate, data_bits, stop_bits, parity)
 
 puts "######################################"
 puts "          NSAgents-backend"
@@ -52,7 +52,7 @@ loop do
     movement = "#{row[:from]} till #{row[:to]}"
     points = "#{row[:point]} poäng. Har totalt #{row[:total]}"
     puts "#{agent} flyttar från #{movement} och får #{points}."
-    port.write turn
+#    port.write turn
    # Sound.play(sound)
   end
 end
